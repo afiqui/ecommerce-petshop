@@ -55,12 +55,8 @@ export default function Content() {
               <FormLabel>Confirmar Senha</FormLabel>
               <Input type="password" placeholder="Confirmar Senha" {...form.register("confirmPassword")} />
               <FormErrorMessage>{form.formState.errors.confirmPassword?.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={!!form.formState.errors.acceptTerms?.message}>
-              <FormLabel>Li e aceito os termos.</FormLabel>
-              <Checkbox {...form.register("acceptTerms")} />
-              <FormErrorMessage>{form.formState.errors.acceptTerms?.message}</FormErrorMessage>
-            </FormControl>
+            </FormControl>            
+            
             <Button type="submit">Cadastrar</Button>
           </SimpleGrid>
         </Flex>

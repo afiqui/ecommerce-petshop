@@ -8,7 +8,6 @@ export const useRegisterForm = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      acceptTerms: false,
     },
   });
 };
