@@ -35,11 +35,11 @@ export const HomeContent: NextPage<{ session: Session }> = ({ session }) => {
       </SimpleGrid>
 
       <Flex w="full" justify="center">
-        {session.status === "authenticated" ? <Link href="/checkout"><Button onClick={()=>{
+        {session.status === "authenticated" ? <Button onClick={()=>{
           setStorage([])
           alert("Compra finalizada!")
           location.href = "/"
-        }}>Finalizar Compra</Button></Link> : <Link href="/signin"><Button>É necessário estar logado pra finalizar a compra.</Button></Link>}
+        }}>Finalizar Compra</Button> : <Link href="/signin"><Button>É necessário estar logado pra finalizar a compra.</Button></Link>}
       </Flex>
 
       <Footer />
