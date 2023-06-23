@@ -18,6 +18,7 @@ const Home = async () => {
   return (
     <HomeContent products={products} categories={categories} />
   )
+
 }
 
 export default Home;
