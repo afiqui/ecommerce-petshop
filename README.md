@@ -2,7 +2,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+### Create atlas account 
+Access: [https://cloud.mongodb.com/](https://cloud.mongodb.com/)
+Create a new project and a new cluster.
+Create a new user and password.
+
+### Create .env file
+Create a .env file in the root of the project and add the following variables:
+```bash
+DATABASE_URL="copy the connection string from mongodb"
+JWT_SECRET="any string"
+```
+
+### Install prisma and generate the client
+```bash
+npm install prisma -D
+npx prisma generate
+```
+Run the development server:
 
 ```bash
 npm run dev
@@ -11,6 +28,8 @@ yarn dev
 # or
 pnpm dev
 ```
+
+Live demo: [https://ecommerce-petshop.vercel.app/](https://ecommerce-petshop.vercel.app/)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
