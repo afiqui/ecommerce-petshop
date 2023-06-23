@@ -7,10 +7,21 @@ import ProductCard from './../../components/ProductCard';
 import Footer from './../../components/Footer';
 import { Category, Product, Comment } from '@prisma/client';
 import { useForm } from 'react-hook-form';
+import { getStorage, delStorage, addStorage } from "../../../hooks/storage"
 
-type Products = (Product & { Comment: Comment[], Category:Category })
+type Products = (Product & { Comment: Comment[], Category: Category })
 
 export const HomeContent: NextPage<{ product: Products }> = ({ product }) => {
+  const [isInCart,setIsInCart] = useState<boolean>(false)
+
+  function updateCartStatus(){
+    setIsInCart(getStorage().some(v=>v.id == product.id))
+  }
+
+  useEffect(()=>{
+    updateCartStatus()
+  },[])
+
 
   return (
     <Flex direction="column" minH="100vh">
@@ -21,7 +32,7 @@ export const HomeContent: NextPage<{ product: Products }> = ({ product }) => {
           <Flex flex={1} justify="center">
             <Image
               h={400}
-              src={product.image||""}
+              src={product.image || ""}
             />
           </Flex>
           <Flex direction="column" flex={2}>
@@ -30,15 +41,17 @@ export const HomeContent: NextPage<{ product: Products }> = ({ product }) => {
             <Text>{product.description}</Text>
             <Text>{product.Category.name}</Text>
             <Text>Nota: {product.Comment.reduce((lista, value) => {
-                return (lista || 0) + value.rating
-              }, 0)}</Text>
-              
+              return (lista || 0) + value.rating
+            }, 0)}</Text>
 
-            <a href={`/cart/${product.id}`}>
-              <Button colorScheme="blue">
-                Adicionar ao Carrinho
+
+              <Button colorScheme={isInCart?"red":"blue"} onClick={()=>{
+                if(isInCart) delStorage(product)
+                else addStorage(product)
+                updateCartStatus()
+              }}>
+                {isInCart? "Remover do Carrinho" :"Adicionar ao Carrinho"}
               </Button>
-            </a>
 
           </Flex>
         </SimpleGrid>
