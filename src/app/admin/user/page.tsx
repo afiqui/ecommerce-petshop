@@ -1,0 +1,21 @@
+import { Metadata } from "next";
+import Content from "./content";
+import { useSession } from "@/hooks/session";
+import { redirect } from "next/navigation"
+
+export default async function Home() {
+
+  const session = await useSession()
+
+  if (session.status == "unauthenticated" || !session.data?.user.isAdmin) {
+    redirect("/signin")
+  }
+
+  return (
+    <Content />
+  )
+}
+
+export const metadata: Metadata = {
+  title: "Gerencie um paciente"
+}
