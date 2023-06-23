@@ -8,7 +8,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Box border="1px" borderColor="gray.200" p={4} rounded="md">
-      <Image src={product.image} alt={product.name} />
+      <Image src={product.image ?? ""} alt={product.name} />
       <Text>{product.name}</Text>
       <Text>{product.description}</Text>
       <Text>Nota: {product.rating}</Text>
