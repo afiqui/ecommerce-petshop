@@ -30,38 +30,8 @@ export default function Layout({
 
         <SimpleGrid h={16} w="full" alignContent="center" columns={3}>
           <Flex></Flex>
-          <Heading fontSize="3xl" textAlign="center">CRENVI</Heading>
-          <Flex justify="right" gap={4}>
-            {session.status === "unauthenticated" &&
-              <>
-                <Link href="/">
-                  <Button colorScheme="blackAlpha">Entrar</Button>
-                </Link>
-                <Link href="/register">
-                  <Button colorScheme="blackAlpha">Registrar</Button>
-                </Link>
-              </>
-            }
-
-            {session.status === "authenticated" && <Flex direction="column" gap={2}>
-              <Text>{session.data?.user.fullName}</Text>
-              <Button size="xs" colorScheme="blackAlpha" onClick={() => {
-                axios.get("/api/logout").then(() => {
-                  route.replace("/")
-                  route.refresh()
-                })
-              }}>Sair</Button>
-            </Flex>}
-          </Flex>
+          <Link href="/"><Heading fontSize="3xl" textAlign="center">PET SHOP</Heading></Link>
         </SimpleGrid>
-
-        <Spacer h={1} borderTop="1px" borderColor="white" w="full" />
-
-        <Flex h={12} w="full" justify="space-between" align="center">
-          {url.map((item, index) => (<Flex key={index}>
-            <Link href={item.url}>{item.name}</Link>
-          </Flex>))}
-        </Flex>
 
         <Flex direction="column" w="full" bgColor="white" border="1px">
           {children}

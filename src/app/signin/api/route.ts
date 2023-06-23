@@ -9,17 +9,9 @@ const prisma = new PrismaClient();
 export async function POST(request: Request) {
   const body = await request.json();
 
-  const validated = SigninFormInput.safeParse(body);
-
-  if (!validated.success) {
-    return NextResponse.json(reduceErrors(validated.error.errors), {
-      status: 400,
-    });
-  }
-
   const user = await prisma.customer.findFirst({
     where: {
-      email: validated.data.email,
+      email: body.email,
     },
   });
 
@@ -27,7 +19,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ email: "Conta inválida" }, { status: 400 });
   }
 
-  if (user.password !== validated.data.password) {
+  if (user.password !== body.senha) {
     return NextResponse.json({ password: "Senha incorreta" }, { status: 400 });
   }
 

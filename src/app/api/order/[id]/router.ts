@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
     const customerId = url[url.length - 1];
     if (!customerId) {
-        return NextResponse.json({ message: "Cliente não informado" }, { status: 404 });
+        return NextResponse.json({ message: "Cliente não informado" }, { status: 400 });
     }
     try {
         const client = await prisma.customer.findFirstOrThrow({
@@ -24,6 +24,6 @@ export async function GET(request: Request) {
         return NextResponse.json(orders);
     }
     catch (error) {
-        return NextResponse.json({ message: "Cliente não encontrado" }, { status: 400 });
+        return NextResponse.json({ message: "Cliente não encontrado" }, { status: 404 });
     }
 }

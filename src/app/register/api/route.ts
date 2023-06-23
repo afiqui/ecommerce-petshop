@@ -8,19 +8,11 @@ const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   const body = await request.json();
-
-  const validated = RegisterFormInput.safeParse(body);
-
-
-    if (!validated.success) {
-      return NextResponse.json(reduceErrors(validated.error.errors), {
-        status: 400,
-      });
-    }
+    
 
     const user = await prisma.customer.findFirst({
       where: {
-        email: validated.data.email,
+        email: body.email,
       },
     });
 
@@ -30,16 +22,16 @@ export async function POST(request: Request) {
 
     const createdUser = await prisma.customer.create({
       data: {
-        fullName: validated.data.fullName,
-        email: validated.data.email,
-        password: validated.data.password,
-        profilePicture: validated.data.profilePicture,
-        address: validated.data.address,
-        phone: validated.data.phone,
-        cpf: validated.data.cpf,
-        creditCardNumber: validated.data.creditCardNumber,
-        creditCardName: validated.data.creditCardName,
-        creditCardCVC: validated.data.creditCardCVC,
+        fullName: body.nome,
+        email: body.email,
+        password: body.senha,
+        profilePicture: body.foto ?? "",
+        address: body.endereco,
+        phone: body.telefone,
+        cpf: body.cpf,
+        creditCardNumber: body.cardNumber,
+        creditCardName: body.cardName,
+        creditCardCVC: body.cardcvc,
         
       },
     });
