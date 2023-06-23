@@ -5,7 +5,7 @@ import { useRegisterForm } from "./hooks/register-form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { RegisterFormInput } from "./validation/register-form";
-import { useRouter } from "next/navigation";
+import { useRouter,redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Navbar from './../components/Navbar';
 import Footer from './../components/Footer';
@@ -41,10 +41,11 @@ export default function Content() {
           onSubmit={form.handleSubmit((data) => {
             api.post("register/api", data).then(() => {
               alert("Cadastro realizado com sucesso!");
+              location.href = "/"
             });
           })}
           m={10}
-           gap={10}
+          gap={10}
         >
 
         <Heading>Cadastro</Heading>

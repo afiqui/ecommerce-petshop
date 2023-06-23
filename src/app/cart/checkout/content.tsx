@@ -2,13 +2,13 @@
 import { NextPage } from "next"
 import { Box, Button, Flex, Heading, Input, Text, Select, SimpleGrid, Divider, Image, Link } from '@chakra-ui/react';
 import { ChangeEvent, useState, useEffect } from 'react';
-import Navbar from './../components/Navbar';
-import ProductCard from './../components/ProductCard';
-import Footer from './../components/Footer';
+import Navbar from './../../components/Navbar';
+import ProductCard from './../../components/ProductCard';
+import Footer from './../../components/Footer';
 import { Category, Product, Comment } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import api from "@/utils/axios";
-import { getStorage, delStorage, addStorage,setStorage } from "../../hooks/storage"
+import { getStorage, delStorage, addStorage,setStorage } from "../../../hooks/storage"
 import { Session } from "@/hooks/session";
 
 export const HomeContent: NextPage<{ session: Session }> = ({ session }) => {
@@ -36,9 +36,7 @@ export const HomeContent: NextPage<{ session: Session }> = ({ session }) => {
 
       <Flex w="full" justify="center">
         {session.status === "authenticated" ? <Link href="/checkout"><Button onClick={()=>{
-          setStorage([])
-          alert("Compra finalizada!")
-          location.href = "/"
+          // setStorage([])
         }}>Finalizar Compra</Button></Link> : <Link href="/signin"><Button>É necessário estar logado pra finalizar a compra.</Button></Link>}
       </Flex>
 

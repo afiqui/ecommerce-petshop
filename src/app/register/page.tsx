@@ -8,7 +8,7 @@ export default async function Home() {
   const session = await useSession()
 
   if (session.status == "authenticated") {
-    redirect("/panel")
+    redirect("/")
   }
 
   return (
